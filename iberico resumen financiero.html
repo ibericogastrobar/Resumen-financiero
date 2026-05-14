@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ibérico — Resumen Financiero 2021–2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg: #0D0B08;
+  --surface: #161310;
+  --card: #1E1A14;
+  --border: rgba(255,255,255,0.06);
+  --gold: #D4A843;
+  --gold2: #F0C96A;
+  --amber: #E8831A;
+  --cream: #F2EBD9;
+  --muted: rgba(242,235,217,0.45);
+  --red: #C0392B;
+  --green: #27AE60;
+  --red-soft: rgba(192,57,43,0.15);
+  --green-soft: rgba(39,174,96,0.15);
+  --gold-soft: rgba(212,168,67,0.12);
+}
+html { scroll-behavior:smooth; }
+body {
+  background:var(--bg);
+  color:var(--cream);
+  font-family:'Lato',sans-serif;
+  font-weight:300;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+body::before {
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:1000;opacity:0.4;
+}
+
+/* HERO */
+.hero {
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:0 32px 56px;
+  position:relative;overflow:hidden;
+}
+.hero-bg {
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 30%,rgba(212,168,67,0.08) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 80% at 20% 80%,rgba(232,131,26,0.06) 0%,transparent 50%),
+    var(--bg);
+}
+.hero-lines {
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(212,168,67,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(212,168,67,0.04) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse at 50% 50%,black 20%,transparent 80%);
+}
+.hero-kpis {
+  position:absolute;top:40px;right:32px;
+  display:flex;flex-direction:column;gap:12px;
+  opacity:0;animation:rise 0.8s ease 0.8s forwards;
+}
+.hero-kpi { text-align:right; }
+.hero-kpi-val { font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--gold2);line-height:1; }
+.hero-kpi-label { font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted); }
+.hero-tag { font-size:10px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;opacity:0;animation:rise 0.8s ease 0.2s forwards; }
+.hero h1 { font-family:'Bebas Neue',sans-serif;font-size:clamp(72px,18vw,160px);line-height:0.88;color:var(--cream);letter-spacing:2px;opacity:0;animation:rise 0.8s ease 0.4s forwards; }
+.hero h1 span { color:var(--gold);display:block; }
+.hero-meta { margin-top:32px;display:flex;align-items:center;gap:24px;opacity:0;animation:rise 0.8s ease 0.6s forwards; }
+.hero-meta-line { width:40px;height:1px;background:var(--gold); }
+.hero-meta p { font-size:12px;letter-spacing:2px;color:var(--muted);text-transform:uppercase; }
+
+/* LAYOUT */
+.section { padding:80px 32px;max-width:900px;margin:0 auto; }
+.band { background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:64px 32px; }
+.band-inner { max-width:900px;margin:0 auto; }
+.section-eyebrow { font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px; }
+.section-title { font-family:'Libre Baskerville',serif;font-size:clamp(28px,5vw,44px);font-weight:400;color:var(--cream);line-height:1.15;margin-bottom:40px; }
+.section-title em { font-style:italic;color:var(--gold2); }
+.label-sm { font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:16px; }
+.note { font-size:11px;color:var(--muted);margin-top:12px;font-style:italic; }
+.two-col { display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start; }
+@media(max-width:600px){.two-col{grid-template-columns:1fr;}}
+
+/* BIG NUMBERS */
+.big-num-row { display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:48px; }
+.big-num { background:var(--surface);padding:28px 20px;position:relative;overflow:hidden;transition:background 0.3s;cursor:default; }
+.big-num:hover { background:var(--card); }
+.big-num::before { content:'';position:absolute;bottom:0;left:0;height:2px;width:0;background:var(--gold);transition:width 0.4s ease; }
+.big-num:hover::before { width:100%; }
+.big-num-label { font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:10px; }
+.big-num-val { font-family:'Bebas Neue',sans-serif;font-size:44px;line-height:1; }
+.big-num-val.gold { color:var(--gold2); }
+.big-num-val.red { color:#EF9A9A; }
+.big-num-val.green { color:#66BB6A; }
+.big-num-sub { font-size:10px;color:var(--muted);margin-top:6px; }
+
+/* BARS */
+.chart-wrap { background:var(--surface);border:1px solid var(--border);padding:28px;margin-bottom:20px; }
+.chart-title { font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:24px; }
+.bar-chart { display:flex;flex-direction:column;gap:14px; }
+.bar-item { display:flex;align-items:center;gap:14px; }
+.bar-name { font-size:11px;color:var(--muted);width:110px;flex-shrink:0;text-align:right; }
+.bar-track { flex:1;height:8px;background:rgba(255,255,255,0.05);border-radius:1px;overflow:hidden; }
+.bar-fill { height:100%;border-radius:1px;animation:grow 1.2s cubic-bezier(0.16,1,0.3,1) both;transform-origin:left; }
+.bar-fill.g { background:linear-gradient(to right,var(--gold),var(--gold2)); }
+.bar-fill.a { background:linear-gradient(to right,var(--amber),#F0A500); }
+.bar-fill.gr { background:linear-gradient(to right,#43A047,#66BB6A); }
+.bar-val { font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--cream);width:100px;flex-shrink:0; }
+
+/* TIMELINE */
+.timeline { position:relative;padding-left:24px; }
+.timeline::before { content:'';position:absolute;left:0;top:8px;bottom:0;width:1px;background:linear-gradient(to bottom,var(--gold) 0%,rgba(212,168,67,0.1) 100%); }
+.tl-item { position:relative;margin-bottom:40px;padding-left:24px; }
+.tl-item::before { content:'';position:absolute;left:-29px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--bg);border:1px solid var(--gold);box-shadow:0 0 12px rgba(212,168,67,0.4); }
+.tl-year { font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:3px;color:var(--gold);margin-bottom:4px; }
+.tl-heading { font-family:'Libre Baskerville',serif;font-size:18px;color:var(--cream);margin-bottom:6px; }
+.tl-body { font-size:13px;color:var(--muted);line-height:1.7;max-width:560px; }
+.tl-number { display:inline-block;margin-top:8px;font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold2); }
+
+/* INSIGHTS */
+.insight-grid { display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px; }
+@media(max-width:600px){.insight-grid{grid-template-columns:1fr;}}
+.insight { background:var(--surface);border:1px solid var(--border);padding:28px 24px;position:relative;overflow:hidden; }
+.insight::after { content:'';position:absolute;top:0;left:0;width:3px;height:100%; }
+.insight.gold::after { background:var(--gold); }
+.insight.red::after { background:var(--red); }
+.insight.green::after { background:var(--green); }
+.insight.amber::after { background:var(--amber); }
+.insight-icon { font-size:22px;margin-bottom:12px; }
+.insight-title { font-family:'Libre Baskerville',serif;font-size:15px;color:var(--cream);margin-bottom:8px; }
+.insight-body { font-size:12px;color:var(--muted);line-height:1.7; }
+.insight-body strong { color:var(--cream);font-weight:700; }
+
+/* TABLE */
+.proj-table { width:100%;border-collapse:collapse;font-size:12px;margin-bottom:16px; }
+.proj-table thead tr { border-bottom:1px solid var(--gold); }
+.proj-table thead th { padding:10px 16px;text-align:left;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:400; }
+.proj-table thead th:not(:first-child) { text-align:right; }
+.proj-table tbody td { padding:12px 16px;border-bottom:1px solid var(--border);color:var(--muted); }
+.proj-table tbody td:not(:first-child) { text-align:right;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px; }
+.proj-table tbody tr:hover td { color:var(--cream);background:var(--gold-soft); }
+.proj-table .highlight td { color:var(--cream);background:var(--gold-soft); }
+.proj-table .red-row td { background:var(--red-soft); }
+.proj-table .green-row td { background:var(--green-soft); }
+.proj-table td.pos { color:#66BB6A !important; }
+.proj-table td.neg { color:#EF9A9A !important; }
+.proj-table td.gold-text { color:var(--gold2) !important; }
+
+/* SCENARIOS */
+.scenario-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:32px; }
+@media(max-width:600px){.scenario-grid{grid-template-columns:1fr;}}
+.scenario { border:1px solid var(--border);padding:24px 20px; }
+.scenario.base { border-color:rgba(212,168,67,0.3); }
+.scenario.bull { border-color:rgba(39,174,96,0.3); }
+.scenario.bear { border-color:rgba(192,57,43,0.3); }
+.scenario-tag { font-size:8px;letter-spacing:4px;text-transform:uppercase;margin-bottom:16px; }
+.scenario.base .scenario-tag { color:var(--gold); }
+.scenario.bull .scenario-tag { color:#66BB6A; }
+.scenario.bear .scenario-tag { color:#EF9A9A; }
+.scenario-val { font-family:'Bebas Neue',sans-serif;font-size:40px;line-height:1;margin-bottom:6px; }
+.scenario.base .scenario-val { color:var(--gold2); }
+.scenario.bull .scenario-val { color:#66BB6A; }
+.scenario.bear .scenario-val { color:#EF9A9A; }
+.scenario-desc { font-size:11px;color:var(--muted);line-height:1.6;margin-top:12px; }
+
+/* BANNER */
+.banner { background:linear-gradient(135deg,rgba(212,168,67,0.12),rgba(232,131,26,0.08));border:1px solid rgba(212,168,67,0.2);padding:36px 32px;margin:40px 0;position:relative;overflow:hidden; }
+.banner::before { content:'"';position:absolute;top:-20px;right:20px;font-family:'Libre Baskerville',serif;font-size:180px;color:rgba(212,168,67,0.06);line-height:1;pointer-events:none; }
+.banner-text { font-family:'Libre Baskerville',serif;font-size:clamp(15px,3vw,20px);font-style:italic;color:var(--cream);line-height:1.5;max-width:620px; }
+.banner-text strong { color:var(--gold2);font-style:normal; }
+
+/* FOOTER */
+footer { border-top:1px solid var(--border);padding:40px 32px;max-width:900px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;gap:24px; }
+.footer-logo { font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--gold);letter-spacing:3px; }
+.footer-info { font-size:10px;color:var(--muted);line-height:1.8;text-align:right; }
+
+/* ANIMATIONS */
+@keyframes rise { from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);} }
+@keyframes grow { from{transform:scaleX(0);}to{transform:scaleX(1);} }
+.reveal { opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease; }
+.reveal.visible { opacity:1;transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-kpis">
+    <div class="hero-kpi"><div class="hero-kpi-val">$258.8K</div><div class="hero-kpi-label">Capital invertido</div></div>
+    <div class="hero-kpi"><div class="hero-kpi-val">$306K</div><div class="hero-kpi-label">Ventas 2023</div></div>
+    <div class="hero-kpi"><div class="hero-kpi-val">+$765</div><div class="hero-kpi-label">Utilidad Q1 2024</div></div>
+  </div>
+  <div class="hero-tag">Distribuidora Ibéricos CCS, C.A. · 2021–2025</div>
+  <h1>IBÉRICO<span>GASTRO BAR</span></h1>
+  <div class="hero-meta"><div class="hero-meta-line"></div><p>Resumen financiero integral · El Hatillo, Caracas</p></div>
+</section>
+
+
+<!-- PANORAMA -->
+<section class="section reveal">
+  <div class="section-eyebrow">Panorama general</div>
+  <div class="section-title">Los números que <em>definen</em> la operación</div>
+  <div class="big-num-row">
+    <div class="big-num"><div class="big-num-label">Capital total invertido</div><div class="big-num-val gold">$258.8K</div><div class="big-num-sub">Aportado por 5 socios · Meta $265.5K</div></div>
+    <div class="big-num"><div class="big-num-label">Ventas netas 2023</div><div class="big-num-val">$306K</div><div class="big-num-sub">Primer año completo de operación</div></div>
+    <div class="big-num"><div class="big-num-label">Resultado 2023</div><div class="big-num-val red">−$26.5K</div><div class="big-num-sub">Pérdida operacional</div></div>
+    <div class="big-num"><div class="big-num-label">Resultado Q1 2024</div><div class="big-num-val green">+$765</div><div class="big-num-sub">Primera utilidad positiva</div></div>
+    <div class="big-num"><div class="big-num-label">Ventas Feb 2025</div><div class="big-num-val gold">$21.1K</div><div class="big-num-sub">21 días operativos · Dato más reciente</div></div>
+  </div>
+</section>
+
+
+<!-- TIMELINE -->
+<div class="band reveal">
+<div class="band-inner">
+  <div class="section-eyebrow">Historia de la operación</div>
+  <div class="section-title" style="margin-bottom:48px;">De la construcción <em>al primer año positivo</em></div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-year">2021 — PRE-APERTURA</div>
+      <div class="tl-heading">Construcción y constitución</div>
+      <div class="tl-body">5 socios conforman la empresa e inician la obra en Torre Q, El Hatillo. Planos, instalaciones, equipos de cocina y mobiliario completo. Capital comprometido de $265.500; aportado $258.777,11.</div>
+      <span class="tl-number">$258.777 aportados · $6.723 pendientes</span>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">NOV–DIC 2022 — APERTURA</div>
+      <div class="tl-heading">Primeros 41 días operativos</div>
+      <div class="tl-body">Noviembre: 429 comensales, ticket promedio $25,71. Diciembre en temporada alta casi triplicó las ventas con 765 comensales a $38,47 de ticket promedio.</div>
+      <span class="tl-number">$40.461 en ventas totales</span>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2023 — PRIMER AÑO COMPLETO</div>
+      <div class="tl-heading">Ventas sólidas, gastos que las superan</div>
+      <div class="tl-body">Ventas brutas de $327.902 con margen bruto del 60%. Sin embargo, nómina ($108K) más alquiler ($48K) consumieron el 51% de las ventas netas, llevando la operación a pérdida.</div>
+      <span class="tl-number">$306K ventas · −$26.560 resultado</span>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">Q1 2024 — INFLEXIÓN</div>
+      <div class="tl-heading">Primera utilidad positiva de la historia</div>
+      <div class="tl-body">8 eventos de alto valor — incluyendo 5 en febrero por Carnaval y San Valentín — llevaron al negocio a utilidad por primera vez. Los eventos representaron el 75,5% de los ingresos del trimestre.</div>
+      <span class="tl-number">$49.628 ventas · +$765 utilidad</span>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">FEB 2025 — HOY</div>
+      <div class="tl-heading">Modelo en transición hacia eventos</div>
+      <div class="tl-body">GastroBar sin operar. 4 eventos con ticket récord de $4.857. Tasa BCV en Bs62,25 (vs Bs36,24 en feb 2024) refleja la inflación acumulada. Señales claras de reconversión del modelo.</div>
+      <span class="tl-number">$21.073 ventas · Ticket evento $4.857</span>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<!-- INGRESOS -->
+<section class="section reveal">
+  <div class="section-eyebrow">Análisis de ingresos</div>
+  <div class="section-title">Dónde viene el <em>dinero real</em></div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Ingresos Q1 2024 por tipo de operación (USD)</div>
+    <div class="bar-chart">
+      <div class="bar-item"><div class="bar-name">Eventos (8)</div><div class="bar-track"><div class="bar-fill g" style="width:100%;animation-delay:0.1s"></div></div><div class="bar-val">$37.471</div></div>
+      <div class="bar-item"><div class="bar-name">Menú del día</div><div class="bar-track"><div class="bar-fill a" style="width:20.9%;animation-delay:0.2s"></div></div><div class="bar-val">$7.828</div></div>
+      <div class="bar-item"><div class="bar-name">GastroBar</div><div class="bar-track"><div class="bar-fill a" style="width:11.5%;animation-delay:0.3s"></div></div><div class="bar-val">$4.329</div></div>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Ticket promedio por tipo · Q1 2024</div>
+    <div class="bar-chart">
+      <div class="bar-item"><div class="bar-name">Por evento</div><div class="bar-track"><div class="bar-fill g" style="width:100%;animation-delay:0.1s"></div></div><div class="bar-val">$4.684</div></div>
+      <div class="bar-item"><div class="bar-name">GastroBar/día</div><div class="bar-track"><div class="bar-fill a" style="width:4.4%;animation-delay:0.2s"></div></div><div class="bar-val">$206</div></div>
+      <div class="bar-item"><div class="bar-name">Menú/día</div><div class="bar-track"><div class="bar-fill a" style="width:3%;animation-delay:0.3s"></div></div><div class="bar-val">$140</div></div>
+    </div>
+  </div>
+
+  <div class="banner">
+    <div class="banner-text">Un solo evento genera lo mismo que <strong>33 días de operación del menú del día</strong>. La rentabilidad depende estructuralmente de los eventos privados.</div>
+  </div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Evolución del ticket por evento</div>
+    <div class="bar-chart">
+      <div class="bar-item"><div class="bar-name">Feb 2024</div><div class="bar-track"><div class="bar-fill g" style="width:90%;animation-delay:0.1s"></div></div><div class="bar-val">$4.368</div></div>
+      <div class="bar-item"><div class="bar-name">Feb 2025</div><div class="bar-track"><div class="bar-fill gr" style="width:100%;animation-delay:0.2s"></div></div><div class="bar-val">$4.857 ↑11%</div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- COSTOS -->
+<div class="band reveal">
+<div class="band-inner">
+  <div class="section-eyebrow">Estructura de costos</div>
+  <div class="section-title">El peso que carga <em>cada mes</em></div>
+  <div class="two-col">
+    <div>
+      <div class="label-sm">Costos fijos mensuales</div>
+      <div class="bar-chart">
+        <div class="bar-item"><div class="bar-name">Personal</div><div class="bar-track"><div class="bar-fill g" style="width:100%;animation-delay:0.1s"></div></div><div class="bar-val">~$6.700</div></div>
+        <div class="bar-item"><div class="bar-name">Alquiler</div><div class="bar-track"><div class="bar-fill a" style="width:58.9%;animation-delay:0.2s"></div></div><div class="bar-val">$3.944</div></div>
+        <div class="bar-item"><div class="bar-name">Entretenimiento</div><div class="bar-track"><div class="bar-fill a" style="width:12.7%;animation-delay:0.3s"></div></div><div class="bar-val">$850</div></div>
+        <div class="bar-item"><div class="bar-name">Cond. + Est.</div><div class="bar-track"><div class="bar-fill a" style="width:9.7%;animation-delay:0.4s"></div></div><div class="bar-val">$650</div></div>
+        <div class="bar-item"><div class="bar-name">Marketing</div><div class="bar-track"><div class="bar-fill a" style="width:14.9%;animation-delay:0.5s"></div></div><div class="bar-val">~$1.000</div></div>
+        <div class="bar-item"><div class="bar-name">Otros</div><div class="bar-track"><div class="bar-fill a" style="width:11.9%;animation-delay:0.6s"></div></div><div class="bar-val">~$800</div></div>
+      </div>
+      <p class="note">Total: ~$13.000–$15.000/mes</p>
+    </div>
+    <div>
+      <div class="label-sm">Punto de equilibrio</div>
+      <div style="background:var(--bg);border:1px solid var(--border);padding:28px;margin-bottom:14px;">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:8px;">Ventas brutas necesarias/mes</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--gold2);line-height:1;">$24–26K</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px;">Con 35% de costo de insumo</div>
+      </div>
+      <div style="background:var(--bg);border:1px solid var(--border);padding:28px;">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:8px;">Equivale mensualmente a</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--cream);line-height:1.1;">5–6 eventos</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px;">ó 178 días de menú — imposible</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<!-- ANÁLISIS -->
+<section class="section reveal">
+  <div class="section-eyebrow">Análisis estratégico</div>
+  <div class="section-title">Lo que <em>dicen los números</em></div>
+  <div class="insight-grid">
+    <div class="insight gold">
+      <div class="insight-icon">💰</div>
+      <div class="insight-title">El alquiler es el mayor riesgo</div>
+      <div class="insight-body">Con <strong>$3.944/mes</strong> ($47.328/año), el alquiler representa el 15,5% de las ventas netas de 2023. Sumado a condominio y estacionamiento llega a $4.769/mes. Cualquier renegociación tiene impacto directo en la rentabilidad.</div>
+    </div>
+    <div class="insight red">
+      <div class="insight-icon">⚠️</div>
+      <div class="insight-title">2023: estructura que no cierra</div>
+      <div class="insight-body">Nómina + alquiler consumieron <strong>$156.000 de los $184.280</strong> de utilidad bruta — el 84,7%. Quedaban $28.280 para cubrir todos los demás gastos. El negocio necesitaba más ingresos desde el primer día.</div>
+    </div>
+    <div class="insight green">
+      <div class="insight-icon">🎯</div>
+      <div class="insight-title">Los eventos lo cambian todo</div>
+      <div class="insight-body">En Q1 2024, <strong>8 eventos generaron $37.471</strong> — 75,5% de los ingresos del trimestre. El ticket promedio por evento ($4.684) supera en <strong>33x</strong> el ingreso diario del menú. La estrategia es clara: más eventos.</div>
+    </div>
+    <div class="insight amber">
+      <div class="insight-icon">📊</div>
+      <div class="insight-title">Señales de 2025</div>
+      <div class="insight-body">GastroBar en <strong>0 días de operación</strong> en febrero 2025 vs 10 días en 2024. El ticket por evento subió a $4.857 (+11%). El negocio parece estar reconvirtiéndose hacia un <strong>modelo exclusivo de eventos</strong>.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PROYECCIONES -->
+<div class="band reveal">
+<div class="band-inner">
+  <div class="section-eyebrow">Proyecciones financieras</div>
+  <div class="section-title">¿A dónde puede <em>llegar</em> el negocio?</div>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:36px;max-width:600px;">Proyecciones anualizadas basadas en datos reales de Q1 2024 y Feb 2025. Se asume costo de insumo 35% y costos fijos ~$14.000/mes.</p>
+
+  <table class="proj-table">
+    <thead>
+      <tr>
+        <th>Escenario</th>
+        <th>Eventos/mes</th>
+        <th>Ticket evento</th>
+        <th>Ingreso mensual</th>
+        <th>Resultado mensual</th>
+        <th>Resultado anual</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="red-row"><td>Solo menú del día</td><td>0</td><td>—</td><td class="neg">~$4.200</td><td class="neg">−$9.800</td><td class="neg">−$117.600</td></tr>
+      <tr><td>Mínimo sostenible</td><td>3</td><td>$4.500</td><td>~$18.150</td><td class="neg">−$2.200</td><td class="neg">−$26.400</td></tr>
+      <tr class="highlight"><td>Punto de equilibrio</td><td>5</td><td>$4.700</td><td>~$25.550</td><td class="gold-text">≈ $0</td><td class="gold-text">≈ $0</td></tr>
+      <tr class="green-row"><td>Modelo Q1 2024</td><td>~6</td><td>$4.684</td><td>~$28.000</td><td class="pos">+$4.200</td><td class="pos">+$50.400</td></tr>
+      <tr class="green-row"><td>Escenario optimista</td><td>8</td><td>$5.000</td><td>~$40.000</td><td class="pos">+$12.000</td><td class="pos">+$144.000</td></tr>
+    </tbody>
+  </table>
+  <p class="note">* Ingresos mensuales incluyen ~$3.500 de operación regular. Costos fijos estimados en $14.000/mes.</p>
+
+  <div class="scenario-grid">
+    <div class="scenario bear"><div class="scenario-tag">🐻 Conservador</div><div class="scenario-val">−$26K</div><div class="scenario-desc">Si se mantiene la estructura de 2023 sin crecer la base de eventos. Repetición de la pérdida del primer año.</div></div>
+    <div class="scenario base"><div class="scenario-tag">📍 Base</div><div class="scenario-val">+$50K</div><div class="scenario-desc">Manteniendo el ritmo de Q1 2024 (~6 eventos/mes a $4.684 c/u). Utilidad anual proyectada ~$50.400.</div></div>
+    <div class="scenario bull"><div class="scenario-tag">🚀 Optimista</div><div class="scenario-val">+$144K</div><div class="scenario-desc">Con 8 eventos/mes a $5.000 promedio. Recuperación de la inversión en menos de 2 años desde ese punto.</div></div>
+  </div>
+</div>
+</div>
+
+
+<!-- RECUPERACIÓN -->
+<section class="section reveal">
+  <div class="section-eyebrow">Recuperación de capital</div>
+  <div class="section-title">¿Cuándo se recupera <em>lo invertido?</em></div>
+
+  <table class="proj-table" style="margin-bottom:32px;">
+    <thead>
+      <tr><th>Escenario</th><th>Utilidad anual</th><th>Inversión a recuperar</th><th>Años para recuperar</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Base (6 eventos/mes)</td><td class="pos">$50.400</td><td>$258.777</td><td class="gold-text">~5,1 años</td></tr>
+      <tr class="green-row"><td>Optimista (8 eventos/mes)</td><td class="pos">$144.000</td><td>$258.777</td><td class="pos">~1,8 años</td></tr>
+      <tr><td>Balanceado (menú + eventos)</td><td class="pos">$80.000</td><td>$258.777</td><td class="gold-text">~3,2 años</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight-grid">
+    <div class="insight gold">
+      <div class="insight-icon">🔑</div>
+      <div class="insight-title">La palanca clave: precio del evento</div>
+      <div class="insight-body">Cada <strong>$100 de aumento</strong> en el ticket promedio por evento, multiplicado por 6 eventos al mes, representa <strong>$7.200 adicionales al año</strong> sin aumentar costos fijos. El ticket ya creció 11% en un año.</div>
+    </div>
+    <div class="insight green">
+      <div class="insight-icon">📈</div>
+      <div class="insight-title">Tendencia positiva confirmada</div>
+      <div class="insight-body">El ticket por evento pasó de <strong>$4.368 (feb 2024)</strong> a <strong>$4.857 (feb 2025)</strong>, +11,2% en un año. Si esta tendencia continúa, el escenario optimista es alcanzable en 2025–2026.</div>
+    </div>
+  </div>
+
+  <div class="banner">
+    <div class="banner-text">Con <strong>6 eventos mensuales al ticket actual de $4.857</strong>, el negocio genera ~$52.700/año de utilidad y recupera la inversión total en <strong>aproximadamente 5 años</strong>. Escalar a 8 eventos lo reduce a menos de 2.</div>
+  </div>
+</section>
+
+
+<footer>
+  <div class="footer-logo">IBÉRICO</div>
+  <div class="footer-info">Distribuidora Ibéricos CCS, C.A. · RIF J502256237<br>Torre Q · El Hatillo · Caracas, Venezuela<br>Datos: 2021–Febrero 2025</div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} });
+}, {threshold:0.08});
+document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+</script>
+</body>
+</html>
